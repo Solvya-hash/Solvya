@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solvya — Everyday Problem Solver</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+      text-align: center;
+    }
+
+    .hero {
+      padding: 70px 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 22px;
+      color: #5b6475;
+      margin-bottom: 35px;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 130px;
+      padding: 15px;
+      border: 1px solid #d9deea;
+      border-radius: 12px;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #response {
+      margin-top: 25px;
+      text-align: left;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <h1>Solvya</h1>
+
+    <div class="tagline">
+      Your everyday problem solver.
+    </div>
+
+    <div class="box">
+      <h2>What's your problem?</h2>
+
+      <textarea id="problem" placeholder="Tell Solvya what's bothering you..."></textarea>
+
+      <br>
+
+      <button onclick="solveProblem()">Get a solution</button>
+
+      <div id="response"></div>
+    </div>
+  </div>
+
+  <script>
+    function solveProblem() {
+      const problem = document.getElementById("problem").value.trim();
+      const response = document.getElementById("response");
+
+      if (!problem) {
+        response.innerHTML = "<strong>Please tell Solvya your problem first.</strong>";
+        return;
+      }
+
+      response.innerHTML = `
+        <h3>Let's solve this together.</h3>
+        <p>You told Solvya:</p>
+        <p><strong>${problem}</strong></p>
+        <p>
+          Solvya is being prepared to give you practical,
+          step-by-step solutions for everyday problems.
+        </p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
