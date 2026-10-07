@@ -108,7 +108,7 @@
     response.innerHTML = "<p>Solvya is thinking of the best solution for you...</p>";
 
     try {
-      const result = await fetch("/api/solve", {
+      const result = await fetch("https://solvya-api.onrender.com/api/solve", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
