@@ -95,25 +95,47 @@
   </div>
 
   <script>
-    function solveProblem() {
-      const problem = document.getElementById("problem").value.trim();
-      const response = document.getElementById("response");
+<script>
+  async function solveProblem() {
+    const problem = document.getElementById("problem").value.trim();
+    const response = document.getElementById("response");
 
-      if (!problem) {
-        response.innerHTML = "<strong>Please tell Solvya your problem first.</strong>";
-        return;
+    if (!problem) {
+      response.innerHTML = "<strong>Please tell Solvya your problem first.</strong>";
+      return;
+    }
+
+    response.innerHTML = "<p>Solvya is thinking of the best solution for you...</p>";
+
+    try {
+      const result = await fetch("/api/solve", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ problem: problem })
+      });
+
+      const data = await result.json();
+
+      if (!result.ok) {
+        throw new Error(data.error || "Something went wrong.");
       }
 
       response.innerHTML = `
-        <h3>Let's solve this together.</h3>
-        <p>You told Solvya:</p>
-        <p><strong>${problem}</strong></p>
-        <p>
-          Solvya is being prepared to give you practical,
-          step-by-step solutions for everyday problems.
-        </p>
+        <h3>Here's your solution:</h3>
+        <p>${data.solution.replace(/\n/g, "<br>")}</p>
+      `;
+
+    } catch (error) {
+      response.innerHTML = `
+        <p><strong>Sorry, Solvya couldn't generate a solution.</strong></p>
+        <p>${error.message}</p>
       `;
     }
+  }
+</script>
+```
   </script>
 
 </body>
