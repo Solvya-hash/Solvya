@@ -32,10 +32,7 @@ Break the solution into simple steps.
 Be encouraging and realistic.
 If the problem is serious or dangerous, recommend appropriate professional help.`
     });
-
-    res.json({
-      solution: response.output_text
-    });
+return res.json({ solution });
 
   } catch (error) {
     console.error(error);
