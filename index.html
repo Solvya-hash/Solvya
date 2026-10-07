@@ -137,6 +137,49 @@
 </script>
 ```
   </script>
+<script>
+async function solveProblem() {
+    const problemInput = document.querySelector('textarea');
 
+    if (!problemInput || !problemInput.value.trim()) {
+        alert("Please enter your problem first.");
+        return;
+    }
+
+    const button = document.querySelector('button[onclick*="solveProblem"]');
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Solving...";
+    }
+
+    try {
+        const response = await fetch("/api/solve", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                problem: problemInput.value.trim()
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Something went wrong.");
+        }
+
+        alert(data.solution || "Solution received.");
+    } catch (error) {
+        alert("Sorry, Solvya could not generate a solution yet.");
+        console.error(error);
+    } finally {
+        if (button) {
+            button.disabled = false;
+            button.textContent = "Get a solution";
+        }
+    }
+}
+</script>
 </body>
 </html>
